@@ -15,7 +15,7 @@ class Assignment extends Model {
         } else {
             return false;
         }
-    }   
+    }
 
     public function save($title, $attachment, $courseId) {
         $statment = $this->pdo->prepare("insert into assignments (title, attachment, course_id) values (?,?,?)");

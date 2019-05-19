@@ -14,37 +14,37 @@ set_include_path(get_include_path() . PATH_SEPARATOR . '../');
 
 if ($route) {
 
-	session_start();
-	
-	$partials = explode("/", $route);
+    session_start();
 
-	if (count($partials) != 2) {
-		die('invalid route');
-	}
+    $partials = explode("/", $route);
 
-	$filename = $partials[0];
-	$class_name = ucfirst(strtolower($filename)) . "Controller";
+    if (count($partials) != 2) {
+        die('invalid route');
+    }
 
-	$function_name = $partials[1];
+    $filename = $partials[0];
+    $class_name = ucfirst(strtolower($filename)) . "Controller";
 
-	if (!file_exists('../controller/' . $class_name . '.php')) {
-		die('error route');
-	}
+    $function_name = $partials[1];
 
-	include('controller/' . $class_name . '.php');
+    if (!file_exists('../controller/' . $class_name . '.php')) {
+        die('error route');
+    }
 
-	if (!class_exists($class_name)) {
-		die('error route');
-	}
+    include('controller/' . $class_name . '.php');
 
-	$controller = new $class_name();
-	if (!method_exists($controller, $function_name)) {
-		die('error route');
-	}
-	$controller->$function_name();
+    if (!class_exists($class_name)) {
+        die('error route');
+    }
+
+    $controller = new $class_name();
+    if (!method_exists($controller, $function_name)) {
+        die('error route');
+    }
+    $controller->$function_name();
 
 } else {
-	include('controller/LoginController.php');
-	$loginController = new LoginController();
-	$loginController->login_page();
+    include('controller/LoginController.php');
+    $loginController = new LoginController();
+    $loginController->login_page();
 }

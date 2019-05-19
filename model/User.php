@@ -26,7 +26,7 @@ class User extends Model {
         } else {
             return false;
         }
-    }   
+    }
 
     public function save($id, $name, $password, $role, $class) {
         $statment = $this->pdo->prepare("insert into users (id, name, password, role, class) values (?,?,?,?,?)");
