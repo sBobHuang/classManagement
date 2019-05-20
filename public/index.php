@@ -18,6 +18,24 @@ if ($route) {
 
     $partials = explode("/", $route);
 
+    if ($partials[0] != 'login') {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /index.php?r=login/login_page');
+        }
+        $user = $_SESSION['user'];
+        if ($user['role'] == 'student') {
+            if ($partials[0] != 'student') {
+                die('权限不足');
+            }
+        } elseif ($user['role'] == 'teacher') {
+            if (!in_array($partials[0], ['teacher', 'assignment'])) {
+                die('权限不足');
+            }
+        } else {
+            die("未授权的访问");
+        }
+    }
+
     if (count($partials) != 2) {
         die('invalid route');
     }

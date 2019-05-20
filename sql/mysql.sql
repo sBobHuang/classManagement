@@ -1,4 +1,4 @@
-create database class default character set utf8 collate utf8_unicode_ci;
+create database class;
 
 use class;
 
